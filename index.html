@@ -1,0 +1,97 @@
+﻿<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DrawingSession</title>
+    <meta name="description" content="クロッキー/ジェスチャー・ドローイング練習用のWebアプリ。フォルダ内の画像を順番に表示し、描画時間と休憩を繰り返しながら練習できます。" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Drawing Session" />
+    <meta property="og:url" content="https://rashikulab-hmmt.github.io/Drawing-Session/" />
+    <meta property="og:title" content="Drawing Session" />
+    <meta property="og:description" content="クロッキー/ジェスチャー・ドローイング練習用のWebアプリ。フォルダ内の画像を順番に表示し、描画時間と休憩を繰り返しながら練習できます。" />
+    <meta property="og:image" content="https://rashikulab-hmmt.github.io/Drawing-Session/ogp.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Drawing Session" />
+    <meta name="twitter:description" content="クロッキー/ジェスチャー・ドローイング練習用のWebアプリ。フォルダ内の画像を順番に表示し、描画時間と休憩を繰り返しながら練習できます。" />
+    <meta name="twitter:image" content="https://rashikulab-hmmt.github.io/Drawing-Session/ogp.png" />
+    <link rel="icon" type="image/png" href="DS_logo.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section class="stage">
+        <div class="stage-meta">
+          <div class="meta-left">
+            <img
+              class="stage-logo"
+              src="DS_full_logo.png"
+              alt="DS"
+              draggable="false"
+              oncontextmenu="return false;"
+            />
+            <a class="readme-btn" href="./help.html" target="_blank" rel="noopener noreferrer">ヘルプ</a>
+          </div>
+          <span id="index-label">0 / 0</span>
+        </div>
+
+        <div class="timer-row">
+          <div class="timer" id="timer-label">00:00</div>
+          <div id="timer-controls-slot"></div>
+        </div>
+
+        <div id="image-wrap" class="image-wrap">
+          <img id="stage-image" alt="表示画像" />
+          <div id="rest-overlay" class="rest-overlay hidden">休憩中</div>
+          <div id="center-overlay" class="center-overlay hidden"></div>
+        </div>
+      </section>
+      <footer class="app-footer">
+        <span>© 2026 ラシクラボ浜松</span>
+        <a class="terms-link" href="./terms.html" target="_blank" rel="noopener noreferrer">利用規約</a>
+      </footer>
+    </main>
+
+    <input id="folder-fallback" type="file" webkitdirectory directory multiple hidden />
+
+    <div id="control-parking" class="hidden"></div>
+
+    <div id="settings-controls" class="settings-controls">
+      <div class="field">
+        <label for="draw-seconds">制限時間</label>
+        <div class="row">
+          <input id="draw-seconds" type="range" min="30" max="300" step="10" value="60" />
+          <strong id="draw-seconds-label">1分</strong>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="break-seconds">休憩時間</label>
+        <div class="row">
+          <input id="break-seconds" type="range" min="10" max="60" step="5" value="20" />
+          <strong id="break-seconds-label">20秒</strong>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>画像の表示順</label>
+        <div class="row order-row">
+          <label><input type="radio" name="order-mode" value="name" checked /> ファイル名順</label>
+          <label><input type="radio" name="order-mode" value="random" /> ランダム</label>
+        </div>
+      </div>
+    </div>
+
+    <div id="controls-panel" class="controls">
+      <button id="start-btn" type="button" class="primary">開始</button>
+      <button id="pause-btn" type="button" disabled>一時停止</button>
+      <button id="next-btn" type="button" disabled>次の画像</button>
+      <button id="stop-btn" type="button" disabled>終了</button>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
+
